@@ -2,7 +2,8 @@
 
 export default async function handler(req, res) {
   // El ID de tu usuario de Instagram
-  const userId = '1132308352052897':
+  const userId = '2759914527731753';
+//'1132308352052897':
 //'17841476081965186';
 //'24654366867514458'; 
   
