@@ -1,8 +1,8 @@
 import fetch from 'node-fetch';
 
 export default async function handler(req, res) {
-  const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
-  const businessAccountId = process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID;
+  const accessToken = process.env.IGAAQF1BUZArqFBZAE1VaHZABMXVKR0xQTnJCUjFENUpkbDlNcUdMb0dhWUhXQmc2d3J0VnRaVHlWcHFoSlFhMmpYMFE1ZAXBGd3FrcUIxcHZAXWFhyUk9xYXBnLXpLQzEtLXBSVVhmdnBpZA0MxNzl5SzhYcDlDV3VGNUpuS0hOSTNBMAZDZD;
+  const businessAccountId = process.env.24654366867514458;
 
   if (!accessToken || !businessAccountId) {
     console.error("Variables de entorno faltantes");
