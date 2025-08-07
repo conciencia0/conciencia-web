@@ -1,31 +1,33 @@
-// Usamos 'node-fetch' para hacer la solicitud desde el servidor.
-// Instálalo con: npm install node-fetch
 const fetch = require('node-fetch');
 
-// Handler para Vercel/Netlify
 export default async function handler(req, res) {
-  // ¡IMPORTANTE! Guarda tu token en las "Variables de Entorno" de tu hosting, no aquí.
+  // 1. Verificar si la variable de entorno existe.
   const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
-  // La API que deberías usar es la "Basic Display API", su endpoint es ligeramente diferente.
+  if (!accessToken) {
+    // Si el token no está configurado, envía un error claro.
+    console.error("Error: La variable de entorno INSTAGRAM_ACCESS_TOKEN no está configurada.");
+    return res.status(500).json({ error: 'El token de acceso del servidor no está configurado.' });
+  }
+
   // Pide también el campo 'thumbnail_url' para los videos.
   const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink,media_type,thumbnail_url&limit=6&access_token=${accessToken}`;
 
   try {
     const instagramResponse = await fetch(url);
-    if (!instagramResponse.ok) {
-      // Si Instagram devuelve un error, lo pasamos al frontend para depurar.
-      const errorData = await instagramResponse.json();
-      console.error('Error desde la API de Instagram:', errorData);
-      return res.status(instagramResponse.status).json({ error: errorData.error.message });
+    const data = await instagramResponse.json();
+
+    // 2. Verificar si la API de Instagram devolvió un error.
+    if (!instagramResponse.ok || data.error) {
+      console.error('Error desde la API de Instagram:', data.error);
+      return res.status(instagramResponse.status).json({ error: `Error de Instagram: ${data.error.message}` });
     }
 
-    const data = await instagramResponse.json();
-    
-    // Devolvemos los datos al frontend en formato JSON
+    // Si todo fue bien, devuelve los datos.
     res.status(200).json(data);
 
   } catch (error) {
+    // Captura cualquier otro error (ej: de red)
     console.error('Error en la función del servidor:', error);
-    res.status(500).json({ error: 'Hubo un error en el servidor.' });
+    res.status(500).json({ error: 'Hubo un error inesperado en el servidor.' });
   }
 }
