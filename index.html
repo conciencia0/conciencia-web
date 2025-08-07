@@ -19,12 +19,8 @@
     header, footer {
       width: 100%; max-width: 1000px; padding: 20px;
     }
-    header {
-      text-align: center; padding-top: 40px;
-    }
-    header img {
-      width: 100px; height: auto;
-    }
+    header { text-align: center; padding-top: 40px; }
+    header img { width: 100px; height: auto; }
     h1 {
       font-size: 2.5em; margin: 10px 0;
       background: linear-gradient(90deg, #00f0ff, #b400ff);
@@ -34,44 +30,21 @@
       max-width: 600px; text-align: center;
       font-size: 1.2em; margin: 20px auto;
     }
-    .botones {
-      text-align: center; margin-bottom: 40px;
-    }
+    .botones { text-align: center; margin-bottom: 40px; }
     .botones a {
-      display: inline-block;
-      background-color: #00d084;
-      color: white;
-      padding: 15px 25px;
-      margin: 10px;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-      transition: background-color 0.3s;
+      display: inline-block; background-color: #00d084; color: white;
+      padding: 15px 25px; margin: 10px; text-decoration: none;
+      border-radius: 10px; font-weight: bold; transition: background-color 0.3s;
     }
-    .botones a:hover {
-      background-color: #00b374;
-    }
-    .video-container {
-      display: flex; justify-content: center; padding: 20px;
-    }
+    .botones a:hover { background-color: #00b374; }
+    .video-container { display: flex; justify-content: center; padding: 20px; }
     #instagramCarousel {
-      max-width: 1000px;
-      width: 100%;
-      padding: 20px;
+      max-width: 1000px; width: 100%; padding: 20px;
     }
-    .carousel-item img {
-      border-radius: 12px;
-    }
-    .loading {
-      text-align: center;
-      margin: 2rem;
-      color: #888;
-    }
+    .carousel-item img { border-radius: 12px; }
+    .loading { text-align: center; margin: 2rem; color: #888; }
     footer {
-      text-align: center;
-      font-size: 0.9em;
-      color: #aaa;
-      margin-bottom: 20px;
+      text-align: center; font-size: 0.9em; color: #aaa; margin-bottom: 20px;
     }
   </style>
 </head>
@@ -87,7 +60,7 @@
       <a href="https://wa.me/5491144152278?text=Hola%2C%20quiero%20automatizar%20mi%20empresa%20con%20ConciencIA">
         📱 Preguntale por WhatsApp<br/>qué puede hacer!
       </a>
-      <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2o5x74p5JhIkAcoHA0HrfZng5gTBQIuZGLd7W8CTeVT719qSocrSqdgNpT3454zAUxQ2BB3vNY">
+      <a href="https://calendar.google.com/calendar/...">
         📅 Agendar una llamada
       </a>
     </div>
@@ -104,7 +77,6 @@
   <h2>Seguí nuestro Instagram</h2>
   <div id="widget-instagram">
     <p class="loading">Cargando publicaciones...</p>
-
     <div
       id="instagramCarousel"
       class="carousel slide"
@@ -112,28 +84,18 @@
       data-bs-ride="carousel"
     >
       <div class="carousel-inner" id="carousel-inner"></div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#instagramCarousel"
-        data-bs-slide="prev"
-      >
+      <button class="carousel-control-prev" type="button"
+              data-bs-target="#instagramCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#instagramCarousel"
-        data-bs-slide="next"
-      >
+      <button class="carousel-control-next" type="button"
+              data-bs-target="#instagramCarousel" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
       </button>
     </div>
   </div>
 
-  <footer>
-    © 2025 ConciencIA. Todos los derechos reservados.
-  </footer>
+  <footer>© 2025 ConciencIA. Todos los derechos reservados.</footer>
 
   <!-- Bootstrap JS bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
