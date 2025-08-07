@@ -8,24 +8,12 @@
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #0f0f0f;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0;
+      background-color: #0f0f0f; color: #fff;
+      display: flex; flex-direction: column; align-items: center;
     }
-    header, footer {
-      width: 100%;
-      max-width: 1000px;
-      padding: 20px;
-    }
-    header {
-      text-align: center;
-      padding-top: 40px;
-    }
+    header, footer { width: 100%; max-width: 1000px; padding: 20px; }
+    header { text-align: center; padding-top: 40px; }
     header img { width: 100px; height: auto; }
     h1 {
       font-size: 2.5em; margin: 10px 0;
@@ -63,7 +51,6 @@
       </a>
     </div>
   </header>
-
   <h2>Mirá cómo trabajamos</h2>
   <div class="video-container">
     <video width="80%" controls style="border-radius: 12px;">
@@ -71,7 +58,6 @@
       Tu navegador no soporta la etiqueta de video.
     </video>
   </div>
-
   <h2>Seguí nuestro Instagram</h2>
   <div id="widget-instagram">
     <p class="loading">Cargando publicaciones...</p>
@@ -81,26 +67,28 @@
       <div class="swiper-button-next"></div>
     </div>
   </div>
-
   <footer>
     © 2025 ConciencIA. Todos los derechos reservados.
   </footer>
-
   <!-- Swiper JS -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const accessToken = 'EAAnOIK0JMCkBPM8TIfWt8fRoZCy60cRjeBZCClr8DAEgZAWuhtT4IRHbDGGkvBgf1Qs2sR5nBphbsJMWZB0UC2dous2bQXZBCNAkEEEDxTgMi89poDeTdXa12IclxARFHK9YRfG1ZCVz32ZCHxAI1ZAPXf8CAnQPcqjqkIaZA5Q9cT3ZATtqjX7thQnZCuLEe3KM7SPChQjzuPZAYZClrgb1LUoERlr2gbtykm5ZC4EAZDZD';
-      const userId = '10240634284981062';
       const loadingEl = document.querySelector('#widget-instagram .loading');
       const swiperEl = document.querySelector('.swiper-container');
 
-      fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink&limit=6&access_token=${accessToken}`)
+      // ¡CAMBIO CLAVE! Apuntamos a nuestro propio servidor/función en lugar de a Instagram directamente.
+      // Si usas un servicio como Vercel o Netlify, la URL sería '/api/instagram'.
+      // Si ejecutas el servidor localmente, sería 'http://localhost:3000/instagram'.
+      fetch('/api/instagram')
         .then(res => {
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          if (!res.ok) throw new Error(`Respuesta del servidor no fue OK: ${res.status}`);
           return res.json();
         })
         .then(json => {
+          if (json.error) {
+             throw new Error(json.error);
+          }
           if (!json.data || !json.data.length) {
             loadingEl.textContent = 'No se encontraron publicaciones.';
             return;
@@ -113,9 +101,11 @@
           json.data.forEach(post => {
             const slide = document.createElement('div');
             slide.classList.add('swiper-slide');
+            // La API de Basic Display no devuelve videos como media_url, se necesita thumbnail_url si es video
+            const imageUrl = post.media_type === "VIDEO" ? post.thumbnail_url : post.media_url;
             slide.innerHTML = `
               <a href="${post.permalink}" target="_blank" style="display:block;">
-                <img src="${post.media_url}" alt="${(post.caption||'').slice(0,50)}" />
+                <img src="${imageUrl}" alt="${(post.caption||'').slice(0,50)}" />
               </a>`;
             feedEl.appendChild(slide);
           });
