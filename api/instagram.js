@@ -1,33 +1,36 @@
-const fetch = require('node-fetch');
+// Archivo: /api/instagram.js
+
+import fetch from 'node-fetch';
 
 export default async function handler(req, res) {
-  // 1. Verificar si la variable de entorno existe.
+  // Leemos de forma segura las variables desde tu hosting (Vercel/Netlify)
   const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
-  if (!accessToken) {
-    // Si el token no está configurado, envía un error claro.
-    console.error("Error: La variable de entorno INSTAGRAM_ACCESS_TOKEN no está configurada.");
-    return res.status(500).json({ error: 'El token de acceso del servidor no está configurado.' });
+  const businessAccountId = process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID; // ¡Nueva variable!
+
+  // Verificación de que ambas variables de entorno están configuradas
+  if (!accessToken || !businessAccountId) {
+    console.error("Error Crítico: Las variables de entorno no están configuradas correctamente.");
+    return res.status(500).json({ error: 'Configuración del servidor incompleta. Contactar al administrador.' });
   }
 
-  // Pide también el campo 'thumbnail_url' para los videos.
-  const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink,media_type,thumbnail_url&limit=6&access_token=${accessToken}`;
+  // ¡ESTA ES LA URL CORRECTA PARA LA API DE EMPRESA!
+  // Usa la versión v19.0 de la API de Facebook (muy estable)
+  const url = `https://graph.facebook.com/v19.0/${businessAccountId}/media?fields=id,caption,media_url,permalink,media_type,thumbnail_url&limit=8&access_token=${accessToken}`;
 
   try {
     const instagramResponse = await fetch(url);
     const data = await instagramResponse.json();
 
-    // 2. Verificar si la API de Instagram devolvió un error.
-    if (!instagramResponse.ok || data.error) {
-      console.error('Error desde la API de Instagram:', data.error);
-      return res.status(instagramResponse.status).json({ error: `Error de Instagram: ${data.error.message}` });
+    // Si la API de Instagram devuelve un error (ej: token inválido)
+    if (data.error) {
+      console.error('Error devuelto por la API de Facebook/Instagram:', data.error);
+      return res.status(400).json({ error: `Error de Instagram: ${data.error.message}` });
     }
 
-    // Si todo fue bien, devuelve los datos.
     res.status(200).json(data);
 
   } catch (error) {
-    // Captura cualquier otro error (ej: de red)
-    console.error('Error en la función del servidor:', error);
+    console.error('Error de ejecución en la función del servidor:', error);
     res.status(500).json({ error: 'Hubo un error inesperado en el servidor.' });
   }
 }
