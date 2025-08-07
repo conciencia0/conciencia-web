@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ConciencIA - Agentes Inteligentes</title>
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -69,37 +71,15 @@
       padding: 20px;
     }
 
-    .instagram-feed {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
+    .swiper-container {
       padding: 20px;
       max-width: 1000px;
     }
 
-    .insta-post {
-      width: 300px;
-      background-color: #1a1a1a;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease;
-    }
-
-    .insta-post:hover {
-      transform: scale(1.03);
-    }
-
-    .insta-post img {
+    .swiper-slide img {
       width: 100%;
       display: block;
-    }
-
-    .insta-caption {
-      padding: 15px;
-      font-size: 14px;
-      color: #ccc;
+      border-radius: 12px;
     }
 
     footer {
@@ -137,34 +117,62 @@
 
   <!-- Instagram Feed -->
   <h2>Seguí nuestro Instagram</h2>
-  <div class="instagram-feed">
-    <!-- Post 1 -->
-    <div class="insta-post">
-      <a href="https://www.instagram.com/p/DNCZlaxMoVt/" target="_blank">
-        <img src="https://scontent.cdninstagram.com/v/t51.82787-15/528371132_17848033344536066_6099239942207291889_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=1-7&_nc_sid=18de74&_nc_ohc=B0XSiyVKvd8Q7kNvwEt8sk0&_nc_oc=AdlOWiPIvET9ZplMJn6t1GMGIEddMwKZzv53PTZeWvqGQ5mSMNdPLXXcjQ9-nOba0L1wT__enA78PTtAOcEgVq7y&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=LnnB-8vNqKqqkNl30UWlxA&oh=00_AfUBrYmGHnUjXUwYYl5m_Mrl79AciH4CkTp5u2GcJa-QEA&oe=689A9CE3" alt="Post de Instagram">
-      </a>
-      <div class="insta-caption">“¿Es caro?” es la pregunta equivocada. La pregunta correcta es: ¿cuánto te cuesta NO automatizar? 💸</div>
+  <div class="swiper-container">
+    <div class="swiper-wrapper" id="instagram-feed">
+      <!-- Slides se inyectan con JS -->
     </div>
-
-    <!-- Post 2 -->
-    <div class="insta-post">
-      <a href="https://www.instagram.com/p/DNCZBVIMcNX/" target="_blank">
-        <img src="https://scontent.cdninstagram.com/v/t51.82787-15/529463145_17848032717536066_3028212152358174150_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ccb=1-7&_nc_sid=18de74&_nc_ohc=VWgIuswjWuMQ7kNvwHd8zlg&_nc_oc=Admz_LL8fYDiBY92KuZirX0jpn_91qlhf4PEpUfxWKMzCfKhQC0cWOovRECRcAv_SjcJu9HbvHBrDutAiSg83MYO&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=LnnB-8vNqKqqkNl30UWlxA&oh=00_AfVKW8JjDcXWEh14tZzcAqluRn72hE56vKEdcXFq9Hu2Dg&oe=689AAC08" alt="Post de Instagram">
-      </a>
-      <div class="insta-caption">¿Sentís que el día se te escapa entre tareas operativas? 🕒 La clave para crecer no es trabajar más horas, es trabajar de forma más inteligente.</div>
-    </div>
-
-    <!-- Post 3 -->
-    <div class="insta-post">
-      <a href="https://www.instagram.com/p/DNCVDwXsfJ3/" target="_blank">
-        <img src="https://scontent.cdninstagram.com/v/t51.82787-15/528362029_17848028256536066_4541024176718940578_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=1-7&_nc_sid=18de74&_nc_ohc=zKo7YAfPP8cQ7kNvwHKd5Kc&_nc_oc=AdkAvNOnCUrckUKOqzG-vU7xeYhNVx6XZONJym31rh9xgcLHZHo7PXxQ2HRibKP9s6jIgbw0rf7Q-WN0kkU54c0&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=LnnB-8vNqKqqkNl30UWlxA&oh=00_AfUtFb__GXUe3UFx84-pm1ZWDzA9hZ7zqZqBYwRr8VhDLQ&oe=689A56B3" alt="Post de Instagram">
-      </a>
-      <div class="insta-caption">La mejor forma de mostrar resultados… es dejar que tus clientes hablen. 🤖💬</div>
-    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
   </div>
 
   <footer>
     © 2025 ConciencIA. Todos los derechos reservados.
   </footer>
+
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    // Configura aquí tu Access Token y User ID
+    const accessToken = 'EAAnOIK0JMCkBPM8TIfWt8fRoZCy60cRjeBZCClr8DAEgZAWuhtT4IRHbDGGkvBgf1Qs2sR5nBphbsJMWZB0UC2dous2bQXZBCNAkEEEDxTgMi89poDeTdXa12IclxARFHK9YRfG1ZCVz32ZCHxAI1ZAPXf8CAnQPcqjqkIaZA5Q9cT3ZATtqjX7thQnZCuLEe3KM7SPChQjzuPZAYZClrgb1LUoERlr2gbtykm5ZC4EAZDZD';
+    const userId = '10240634284981062';
+
+    // Función que monta el carrusel con Swiper
+    function montarCarrusel(posts) {
+      const feedEl = document.getElementById('instagram-feed');
+      posts.forEach(post => {
+        const slide = document.createElement('div');
+        slide.classList.add('swiper-slide');
+        slide.innerHTML = `
+          <a href="${post.permalink}" target="_blank" style="display:block;">
+            <img src="${post.media_url}" alt="${(post.caption||'').slice(0,50)}" />
+          </a>
+        `;
+        feedEl.appendChild(slide);
+      });
+
+      new Swiper('.swiper-container', {
+        slidesPerView: 3,
+        spaceBetween: 20,
+        loop: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+          0:    { slidesPerView: 1 },
+          640:  { slidesPerView: 2 },
+          1024: { slidesPerView: 3 }
+        }
+      });
+    }
+
+    // Petición para los últimos 6 posts
+    fetch(`https://graph.instagram.com/${userId}/media?fields=id,caption,media_url,permalink&limit=6&access_token=${accessToken}`)
+      .then(res => res.json())
+      .then(json => montarCarrusel(json.data))
+      .catch(console.error);
+
+  </script>
 </body>
 </html>
+
