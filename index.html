@@ -17,76 +17,34 @@
       flex-direction: column;
       align-items: center;
     }
-
+    header, footer {
+      width: 100%;
+      max-width: 1000px;
+      padding: 20px;
+    }
     header {
       text-align: center;
-      padding: 40px 20px 20px;
+      padding-top: 40px;
     }
-
-    header img {
-      width: 100px;
-      height: auto;
-    }
-
+    header img { width: 100px; height: auto; }
     h1 {
-      font-size: 2.5em;
-      margin: 10px 0;
+      font-size: 2.5em; margin: 10px 0;
       background: linear-gradient(90deg, #00f0ff, #b400ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-
-    h2 {
-      margin-top: 60px;
-      text-align: center;
-      color: #00f0ff;
-    }
-
-    .descripcion {
-      max-width: 600px;
-      text-align: center;
-      font-size: 1.2em;
-      margin-bottom: 40px;
-    }
-
+    .descripcion { max-width: 600px; text-align: center; font-size: 1.2em; margin: 20px auto; }
+    .botones { text-align: center; margin-bottom: 40px; }
     .botones a {
-      display: inline-block;
-      background-color: #00d084;
-      color: white;
-      padding: 15px 25px;
-      margin: 10px;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
+      display: inline-block; background-color: #00d084; color: white;
+      padding: 15px 25px; margin: 10px; text-decoration: none;
+      border-radius: 10px; font-weight: bold; transition: background-color 0.3s;
     }
-
-    .botones a:hover {
-      background-color: #00b374;
-    }
-
-    .video-container {
-      display: flex;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .swiper-container {
-      padding: 20px;
-      max-width: 1000px;
-    }
-
-    .swiper-slide img {
-      width: 100%;
-      display: block;
-      border-radius: 12px;
-    }
-
-    footer {
-      margin: 60px 0 20px;
-      font-size: 0.9em;
-      color: #aaa;
-    }
+    .botones a:hover { background-color: #00b374; }
+    .video-container { display: flex; justify-content: center; padding: 20px; }
+    .swiper-container { padding: 20px; width: 100%; max-width: 1000px; }
+    .swiper-slide img { width: 100%; display: block; border-radius: 12px; }
+    footer { text-align: center; font-size: 0.9em; color: #aaa; margin-bottom: 20px; }
+    .loading { color: #888; font-size: 1em; text-align: center; margin: 40px 0; }
   </style>
 </head>
 <body>
@@ -106,7 +64,6 @@
     </div>
   </header>
 
-  <!-- Video -->
   <h2>Mirá cómo trabajamos</h2>
   <div class="video-container">
     <video width="80%" controls style="border-radius: 12px;">
@@ -115,14 +72,14 @@
     </video>
   </div>
 
-  <!-- Instagram Feed -->
   <h2>Seguí nuestro Instagram</h2>
-  <div class="swiper-container">
-    <div class="swiper-wrapper" id="instagram-feed">
-      <!-- Slides se inyectan con JS -->
+  <div id="widget-instagram">
+    <p class="loading">Cargando publicaciones...</p>
+    <div class="swiper-container" style="display:none;">
+      <div class="swiper-wrapper" id="instagram-feed"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
   </div>
 
   <footer>
@@ -132,47 +89,50 @@
   <!-- Swiper JS -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script>
-    // Configura aquí tu Access Token y User ID
-    const accessToken = 'EAAnOIK0JMCkBPM8TIfWt8fRoZCy60cRjeBZCClr8DAEgZAWuhtT4IRHbDGGkvBgf1Qs2sR5nBphbsJMWZB0UC2dous2bQXZBCNAkEEEDxTgMi89poDeTdXa12IclxARFHK9YRfG1ZCVz32ZCHxAI1ZAPXf8CAnQPcqjqkIaZA5Q9cT3ZATtqjX7thQnZCuLEe3KM7SPChQjzuPZAYZClrgb1LUoERlr2gbtykm5ZC4EAZDZD';
-    const userId = '10240634284981062';
+    document.addEventListener('DOMContentLoaded', () => {
+      const accessToken = 'EAAnOIK0JMCkBPM8TIfWt8fRoZCy60cRjeBZCClr8DAEgZAWuhtT4IRHbDGGkvBgf1Qs2sR5nBphbsJMWZB0UC2dous2bQXZBCNAkEEEDxTgMi89poDeTdXa12IclxARFHK9YRfG1ZCVz32ZCHxAI1ZAPXf8CAnQPcqjqkIaZA5Q9cT3ZATtqjX7thQnZCuLEe3KM7SPChQjzuPZAYZClrgb1LUoERlr2gbtykm5ZC4EAZDZD';
+      const userId = '10240634284981062';
+      const loadingEl = document.querySelector('#widget-instagram .loading');
+      const swiperEl = document.querySelector('.swiper-container');
 
-    // Función que monta el carrusel con Swiper
-    function montarCarrusel(posts) {
-      const feedEl = document.getElementById('instagram-feed');
-      posts.forEach(post => {
-        const slide = document.createElement('div');
-        slide.classList.add('swiper-slide');
-        slide.innerHTML = `
-          <a href="${post.permalink}" target="_blank" style="display:block;">
-            <img src="${post.media_url}" alt="${(post.caption||'').slice(0,50)}" />
-          </a>
-        `;
-        feedEl.appendChild(slide);
-      });
+      fetch(`https://graph.instagram.com/${userId}/media?fields=id,caption,media_url,permalink&limit=6&access_token=${accessToken}`)
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.json();
+        })
+        .then(json => {
+          if (!json.data || !json.data.length) {
+            loadingEl.textContent = 'No se encontraron publicaciones.';
+            return;
+          }
+          // Quitar mensaje y mostrar carrusel
+          loadingEl.style.display = 'none';
+          swiperEl.style.display = 'block';
 
-      new Swiper('.swiper-container', {
-        slidesPerView: 3,
-        spaceBetween: 20,
-        loop: true,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-        breakpoints: {
-          0:    { slidesPerView: 1 },
-          640:  { slidesPerView: 2 },
-          1024: { slidesPerView: 3 }
-        }
-      });
-    }
+          const feedEl = document.getElementById('instagram-feed');
+          json.data.forEach(post => {
+            const slide = document.createElement('div');
+            slide.classList.add('swiper-slide');
+            slide.innerHTML = `
+              <a href="${post.permalink}" target="_blank" style="display:block;">
+                <img src="${post.media_url}" alt="${(post.caption||'').slice(0,50)}" />
+              </a>`;
+            feedEl.appendChild(slide);
+          });
 
-    // Petición para los últimos 6 posts
-    fetch(`https://graph.instagram.com/${userId}/media?fields=id,caption,media_url,permalink&limit=6&access_token=${accessToken}`)
-      .then(res => res.json())
-      .then(json => montarCarrusel(json.data))
-      .catch(console.error);
-
+          new Swiper('.swiper-container', {
+            slidesPerView: 3,
+            spaceBetween: 20,
+            loop: true,
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+            breakpoints: { 0: { slidesPerView: 1 }, 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+          });
+        })
+        .catch(err => {
+          loadingEl.textContent = 'Error cargando Instagram: ' + err.message;
+          console.error(err);
+        });
+    });
   </script>
 </body>
 </html>
-
