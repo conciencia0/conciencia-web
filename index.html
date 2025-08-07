@@ -95,7 +95,7 @@
       const loadingEl = document.querySelector('#widget-instagram .loading');
       const swiperEl = document.querySelector('.swiper-container');
 
-      fetch(`https://graph.instagram.com/${userId}/media?fields=id,caption,media_url,permalink&limit=6&access_token=${accessToken}`)
+      fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink&limit=6&access_token=${accessToken}`)
         .then(res => {
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           return res.json();
