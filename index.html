@@ -3,142 +3,543 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ConciencIA - Agentes Inteligentes</title>
+  <title>ConciencIA - Soluciones Inteligentes</title>
   <!-- Bootstrap CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <style>
+    /* --- ESTILOS GENERALES --- */
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+      color: #ffffff;
       margin: 0; padding: 0;
-      background-color: #0f0f0f; color: #fff;
       display: flex; flex-direction: column; align-items: center;
+      min-height: 100vh;
     }
-    header, footer {
-      width: 100%; max-width: 1000px; padding: 20px;
+
+    .main-wrapper {
+      width: 100%;
+      max-width: 1200px;
+      padding: 20px;
+      flex: 1;
     }
-    header { text-align: center; padding-top: 40px; }
-    header img { width: 100px; height: auto; }
-    h1 {
-      font-size: 2.5em; margin: 10px 0;
-      background: linear-gradient(90deg, #00f0ff, #b400ff);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+
+    /* --- HEADER --- */
+    header {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, rgba(64, 224, 208, 0.05) 0%, rgba(147, 51, 234, 0.05) 100%);
+      border-radius: 20px;
+      margin-bottom: 50px;
+      border: 1px solid rgba(64, 224, 208, 0.1);
     }
+
+    header img.main-logo {
+      width: 160px; 
+      height: auto; 
+      margin-bottom: 15px;
+      mix-blend-mode: screen;
+      filter: drop-shadow(0 0 10px rgba(64, 224, 208, 0.5));
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    h1.brand-title {
+      font-size: 3.5em;
+      margin: 10px 0;
+      font-weight: 800;
+      background: linear-gradient(90deg, #40E0D0 0%, #9333EA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
     .descripcion {
-      max-width: 600px; text-align: center;
-      font-size: 1.2em; margin: 20px auto;
+      max-width: 700px; 
+      margin: 20px auto;
+      font-size: 1.2em; 
+      color: #cbd5e0;
+      line-height: 1.6;
     }
-    .botones { text-align: center; margin-bottom: 40px; }
-    .botones a {
-      display: inline-block; background-color: #00d084; color: white;
-      padding: 15px 25px; margin: 10px; text-decoration: none;
-      border-radius: 10px; font-weight: bold; transition: background-color 0.3s;
+
+    /* --- BOTONES HEADER --- */
+    .header-buttons {
+      display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px;
     }
-    .botones a:hover { background-color: #00b374; }
-    .video-container { display: flex; justify-content: center; padding: 20px; }
-    #instagramCarousel {
-      max-width: 1000px; width: 100%; padding: 20px;
+
+    .btn-consultar {
+      display: inline-block; padding: 12px 30px;
+      background: linear-gradient(135deg, #40E0D0 0%, #9333EA 100%);
+      color: white; text-decoration: none; border-radius: 50px; font-weight: 700;
+      transition: all 0.3s ease; box-shadow: 0 5px 20px rgba(64, 224, 208, 0.3);
+      border: 2px solid transparent;
     }
-    .carousel-item img { border-radius: 12px; }
-    .loading { text-align: center; margin: 2rem; color: #888; }
+    .btn-consultar:hover {
+      transform: translateY(-2px); box-shadow: 0 8px 30px rgba(64, 224, 208, 0.5); color: white;
+    }
+
+    .btn-agenda {
+      display: inline-block; padding: 12px 30px;
+      background: transparent; color: #40E0D0; text-decoration: none;
+      border-radius: 50px; font-weight: 700; transition: all 0.3s ease;
+      border: 2px solid #40E0D0;
+    }
+    .btn-agenda:hover {
+      background: rgba(64, 224, 208, 0.1); color: #fff; border-color: #9333EA; transform: translateY(-2px);
+    }
+
+    /* --- CATÁLOGO --- */
+    .catalog-header { text-align: center; margin-bottom: 50px; margin-top: 20px; }
+    .catalog-header h2 { font-size: 2.8em; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .catalog-header p { color: #a0aec0; font-size: 1.2em; }
+
+    .section-container { margin-bottom: 60px; }
+    .catalog-title {
+      font-size: 2em; margin-bottom: 30px; padding-left: 20px;
+      border-left: 5px solid; border-image: linear-gradient(135deg, #40E0D0 0%, #9333EA 100%) 1; color: #fff;
+    }
+
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+
+    /* --- ESTILO DE TARJETAS (TIPO IMAGEN) --- */
+    .custom-card {
+      background: #0f1221; 
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+      overflow: hidden; 
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .custom-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(64, 224, 208, 0.5);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-img-wrapper {
+      width: 100%;
+      height: 220px;
+      position: relative;
+    }
+
+    .card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    .custom-card:hover .card-img-wrapper img { opacity: 1; }
+
+    .card-img-overlay-gradient {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(to bottom, rgba(15,18,33,0.1), rgba(15,18,33,1));
+    }
+
+    .card-badges {
+      position: absolute; top: 15px; right: 15px; display: flex; gap: 8px;
+    }
+
+    .card-badge {
+      background: rgba(0, 0, 0, 0.7); color: #40E0D0; border: 1px solid #40E0D0;
+      padding: 4px 10px; border-radius: 6px; font-size: 0.75em; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px; backdrop-filter: blur(4px);
+    }
+    
+    .card-badge.secondary { color: #9333EA; border-color: #9333EA; }
+
+    .card-content { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+    .card-title { font-size: 1.6em; margin-bottom: 12px; color: #fff; font-weight: 700; }
+    
+    .card-description {
+      color: #a0aec0; margin-bottom: 25px; font-size: 0.95em; line-height: 1.6; flex: 1;
+    }
+
+    .platforms { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+    .platform-badge {
+      background: rgba(255, 255, 255, 0.05); padding: 6px 12px; border-radius: 20px;
+      font-size: 0.8em; border: 1px solid rgba(255, 255, 255, 0.1); color: #ccc;
+    }
+
+    /* --- LISTA DE AUTOMATIZACIONES --- */
+    .automation-list { list-style: none; padding: 0; }
+    .automation-list li {
+      background: rgba(26, 31, 58, 0.6); margin-bottom: 15px; padding: 25px;
+      border-radius: 12px; border-left: 4px solid #40E0D0; transition: all 0.3s ease;
+    }
+    .automation-list li:hover {
+      background: rgba(26, 31, 58, 0.9); transform: translateX(5px); border-left-color: #9333EA;
+    }
+    .automation-title { font-weight: 700; color: #40E0D0; margin-bottom: 10px; font-size: 1.15em; }
+    .automation-description { color: #a0aec0; font-size: 0.95em; }
+
+    /* --- SECCIÓN DE MÉTRICAS (NUMBERS) --- */
+    .metrics-section {
+      padding: 60px 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 20px;
+      margin-bottom: 60px;
+      text-align: center;
+      border: 1px solid rgba(147, 51, 234, 0.1);
+    }
+    .metrics-title {
+      font-size: 2.2em;
+      font-weight: 800;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #fff, #a0aec0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .metrics-subtitle { color: #a0aec0; margin-bottom: 40px; font-size: 1.1em; }
+    
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+    .metric-item {
+      padding: 20px;
+      border-left: 1px solid rgba(64, 224, 208, 0.2);
+    }
+    .metric-number {
+      font-size: 2.5em;
+      font-weight: 800;
+      color: #9333EA; /* Violeta */
+      margin-bottom: 5px;
+      display: block;
+    }
+    .metric-label {
+      font-size: 1.1em;
+      color: #fff;
+      font-weight: 600;
+    }
+    .metric-sub { font-size: 0.9em; color: #666; }
+
+    /* --- SECCIÓN CÓMO EMPEZAMOS (STEPS) --- */
+    .steps-section { margin-bottom: 60px; text-align: center; }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .step-card {
+      background: rgba(26, 31, 58, 0.4);
+      padding: 30px;
+      border-radius: 15px;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: transform 0.3s;
+    }
+    .step-card:hover { transform: translateY(-5px); border-color: rgba(64, 224, 208, 0.3); }
+    
+    .step-number {
+      background: linear-gradient(135deg, #40E0D0 0%, #9333EA 100%);
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5em; font-weight: bold; color: #fff;
+      margin: 0 auto 20px auto;
+      box-shadow: 0 5px 15px rgba(147, 51, 234, 0.4);
+    }
+    .step-title { color: #fff; font-size: 1.3em; margin-bottom: 10px; font-weight: 700; }
+    .step-desc { color: #a0aec0; font-size: 0.95em; }
+
+    /* --- TECH STACK --- */
+    .tech-stack { text-align: center; padding: 40px 20px; margin-top: 20px; margin-bottom: 40px; }
+    .tech-title {
+      color: #40E0D0; font-size: 0.9em; letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 30px; font-weight: 700;
+    }
+    .logos-container { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 40px; opacity: 0.7; }
+    .tech-item {
+      display: flex; align-items: center; gap: 10px; font-size: 1.5em; color: #ccc;
+      font-weight: 600; transition: all 0.3s ease;
+    }
+    .tech-item:hover { color: #fff; transform: scale(1.05); opacity: 1; }
+    .tech-item i { font-size: 1.2em; }
+    
+    .tech-item:hover .fa-telegram { color: #0088cc; }
+    .tech-item:hover .fa-whatsapp { color: #25D366; }
+    .tech-item:hover .fa-instagram { color: #E1306C; }
+    .tech-item:hover .fa-google { color: #4285F4; } 
+    .tech-item:hover .fa-robot { color: #10a37f; }
+    .tech-item:hover .fa-share-nodes { color: #ff6b6b; }
+
+    /* --- BOTÓN FLOTANTE WHATSAPP --- */
+    .float-wa {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 30px;
+      right: 30px;
+      background-color: #25d366;
+      color: #FFF;
+      border-radius: 50px;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 2px 2px 3px rgba(0,0,0,0.5);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .float-wa:hover {
+      background-color: #128C7E;
+      color: white;
+      transform: scale(1.1);
+    }
+
+    /* --- DEV SECTION --- */
+    .custom-dev-section {
+      text-align: center; padding: 40px 20px; background: rgba(255, 255, 255, 0.02);
+      border-radius: 15px; margin-bottom: 50px; border: 1px dashed rgba(147, 51, 234, 0.3);
+    }
+    .custom-dev-section h4 { color: #fff; margin-bottom: 10px; }
+    .custom-dev-section p { color: #aaa; margin: 0; }
+
+    /* --- FOOTER --- */
     footer {
-      text-align: center; font-size: 0.9em; color: #aaa; margin-bottom: 20px;
+      text-align: center; padding: 40px 20px; border-top: 1px solid rgba(64, 224, 208, 0.1);
+      color: #718096; width: 100%; margin-top: auto;
+    }
+    .footer-highlight { font-size: 1.2em; color: #fff; margin-bottom: 15px; font-weight: 500; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1.brand-title { font-size: 2.5em; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .metrics-grid { grid-template-columns: 1fr 1fr; }
+      .float-wa { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 25px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="Logo ConciencIA" />
-    <h1>ConciencIA</h1>
-    <p class="descripcion">
-      Creamos agentes inteligentes que automatizan tareas repetitivas y permiten que
-      vos te enfoques en expandir tu empresa.
-    </p>
-    <div class="botones">
-      <a href="https://wa.me/5491144152278?text=Hola%2C%20quiero%20automatizar%20mi%20empresa%20con%20ConciencIA">
-        📱 Preguntale por WhatsApp<br/>qué puede hacer!
-      </a>
-      <a href="https://calendar.google.com/calendar/...">
-        📅 Agendar una llamada
-      </a>
-    </div>
-  </header>
 
-  <h2>Mirá cómo trabajamos</h2>
-  <div class="video-container">
-    <video width="80%" controls style="border-radius: 12px;">
-      <source src="Prueba1.mp4" type="video/mp4" />
-      Tu navegador no soporta la etiqueta de video.
-    </video>
+  <div class="main-wrapper">
+    
+    <!-- HEADER -->
+    <header>
+      <img src="logo.png" alt="Logo ConciencIA" class="main-logo" />
+      <h1 class="brand-title">ConciencIA</h1>
+      <p class="descripcion">
+        Automatizamos procesos complejos para que tu equipo recupere su tiempo 
+        y tu empresa escale sin límites operativos.
+      </p>
+      <div class="header-buttons">
+        <a href="https://linktr.ee/conciencia.ia0" class="btn-consultar" target="_blank">🚀 Consultar servicio</a>
+        <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2o5x74p5JhIkAcoHA0HrfZng5gTBQIuZGLd7W8CTeVT719qSocrSqdgNpT3454zAUxQ2BB3vNY" class="btn-agenda" target="_blank">📅 Agenda tu meet</a>
+      </div>
+    </header>
+
+    <div class="catalog-header">
+        <h2>Nuestro catálogo</h2>
+        <p>Soluciones modulares diseñadas para integrarse perfectamente en tu flujo de trabajo actual.</p>
+    </div>
+
+    <!-- SECCIÓN 1: ATENCIÓN AL CLIENTE (MOVIDA ARRIBA) -->
+    <section class="section-container">
+      <h2 class="catalog-title">💬 Atención al Cliente</h2>
+      <div class="cards-grid">
+        
+        <div class="custom-card">
+          <div class="card-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop" alt="Soporte IA">
+            <div class="card-img-overlay-gradient"></div>
+            <div class="card-badges">
+              <span class="card-badge">SOPORTE</span>
+              <span class="card-badge secondary">EFICIENCIA</span>
+            </div>
+          </div>
+
+          <div class="card-content">
+            <h3 class="card-title">Soporte & Ticketing IA</h3>
+            <p class="card-description">
+              Brinda una experiencia de usuario impecable. El sistema entiende el lenguaje natural y resuelve el 80% de las dudas frecuentes al instante. Para casos complejos, la IA recopila información, categoriza la incidencia y crea tickets estructurados en tu plataforma, asignando prioridades automáticamente.
+            </p>
+            <div class="platforms">
+              <span class="platform-badge"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span>
+              <span class="platform-badge"><i class="fa-brands fa-telegram"></i> Telegram</span>
+              <span class="platform-badge">📊 Asana</span>
+              <span class="platform-badge">📋 Trello</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: AGENTES DE VENTA (MOVIDA ABAJO) -->
+    <section class="section-container">
+      <h2 class="catalog-title">🤖 Agentes de Venta</h2>
+      <div class="cards-grid">
+        
+        <div class="custom-card">
+          <div class="card-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" alt="Agente Ventas">
+            <div class="card-img-overlay-gradient"></div>
+            <div class="card-badges">
+              <span class="card-badge">MULTI-CANAL</span>
+              <span class="card-badge secondary">VENTAS</span>
+            </div>
+          </div>
+          
+          <div class="card-content">
+            <h3 class="card-title">Agente de Ventas</h3>
+            <p class="card-description">
+              Olvídate de perder clientes por demoras. Nuestro agente IA actúa como tu mejor vendedor: atiende consultas en tiempo real 24/7, detecta la intención de compra, maneja objeciones y guía al usuario hasta el cierre o la agenda de una reunión.
+            </p>
+            <div class="platforms">
+              <span class="platform-badge"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span>
+              <span class="platform-badge"><i class="fa-brands fa-telegram"></i> Telegram</span>
+              <span class="platform-badge"><i class="fa-brands fa-instagram"></i> Instagram</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: AUTOMATIZACIONES -->
+    <section class="section-container">
+      <h2 class="catalog-title">⚡ Automatizaciones Empresariales</h2>
+      <ul class="automation-list">
+        <li>
+          <div class="automation-title">📊 Reportes Ejecutivos Automatizados</div>
+          <div class="automation-description">
+            Recibe cada mañana un informe ejecutivo visual con KPIs, ventas y métricas de rendimiento directamente en tu email o canal de Slack, sin abrir una hoja de cálculo.
+          </div>
+        </li>
+        <!-- ITEM MODIFICADO -->
+        <li>
+          <div class="automation-title">🎙️ Análisis de Consultas y Grabaciones</div>
+          <div class="automation-description">
+            Ideal para consultorios, clínicas o puntos de venta. Grabamos y transcribimos la interacción con el cliente, generando un análisis detallado y un resumen automático para tu historial o control de calidad.
+          </div>
+        </li>
+        <li>
+          <div class="automation-title">📄 Gestión Documental & Facturación</div>
+          <div class="automation-description">
+            La IA extrae datos clave de facturas (PDF o imagen), valida la información fiscal y la carga automáticamente en tu ERP o Google Sheets, organizando los archivos en Drive.
+          </div>
+        </li>
+        <li>
+          <div class="automation-title">✉️ Asistente de Email Corporativo</div>
+          <div class="automation-description">
+            Clasificación automática de la bandeja de entrada, redacción de borradores de respuesta sugeridos y gestión inteligente de archivos adjuntos.
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- NUEVA SECCIÓN: MÉTRICAS (LO QUE DICEN LOS NÚMEROS) -->
+    <section class="metrics-section">
+      <h2 class="metrics-title">Menos tareas repetitivas, más tiempo para lo importante</h2>
+      <p class="metrics-subtitle">Automatizar no es solo ahorrar tiempo, es recuperar el foco para escalar tu negocio.</p>
+      
+      <div class="metrics-grid">
+        <div class="metric-item">
+          <span class="metric-number">+5 h/día</span>
+          <span class="metric-label">Recuperadas</span>
+        </div>
+        <div class="metric-item">
+          <span class="metric-number">67%</span>
+          <span class="metric-label">Conversión</span>
+          <span class="metric-sub">Mejora promedio</span>
+        </div>
+        <div class="metric-item">
+          <span class="metric-number">100%</span>
+          <span class="metric-label">Cobertura 24/7</span>
+        </div>
+        <div class="metric-item">
+          <span class="metric-number">30%</span>
+          <span class="metric-label">Ahorro</span>
+          <span class="metric-sub">Operativo</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- NUEVA SECCIÓN: CÓMO EMPEZAMOS -->
+    <section class="steps-section">
+      <h2 class="catalog-title" style="border:none; padding:0; text-align:center;">¿Cómo empezamos?</h2>
+      <div class="steps-grid">
+        
+        <!-- Paso 1 -->
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Agenda tu meet</h3>
+          <p class="step-desc">
+            Tenemos una breve reunión para entender los cuellos de botella de tu negocio y definir la mejor estrategia.
+          </p>
+        </div>
+
+        <!-- Paso 2 -->
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Desarrollo</h3>
+          <p class="step-desc">
+            Configuramos y entrenamos a tus agentes IA con tu información y estilo de marca. Integramos tus canales.
+          </p>
+        </div>
+
+        <!-- Paso 3 -->
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3 class="step-title">En 30 días funcionando</h3>
+          <p class="step-desc">
+            Realizamos las pruebas finales y lanzamos tu sistema automatizado. Tu empresa empieza a trabajar sola.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="custom-dev-section">
+        <h4>💡 ¿Tenés otra idea en mente?</h4>
+        <p>Si tenés otra idea de desarrollo o una necesidad específica, no dudes en consultarnos. Creamos soluciones a medida.</p>
+    </div>
+
+    <!-- TECH STACK -->
+    <section class="tech-stack">
+        <div class="tech-title">TECNOLOGÍA DE VANGUARDIA</div>
+        <div class="logos-container">
+            <div class="tech-item"><i class="fa-solid fa-share-nodes"></i> <span>n8n</span></div>
+            <div class="tech-item"><i class="fa-solid fa-robot"></i> <span>OpenAI</span></div>
+            <div class="tech-item"><i class="fa-brands fa-instagram"></i> <span>Instagram</span></div>
+            <div class="tech-item"><i class="fa-brands fa-telegram"></i> <span>Telegram</span></div>
+            <div class="tech-item"><i class="fa-brands fa-whatsapp"></i> <span>WhatsApp</span></div>
+            <div class="tech-item"><i class="fa-brands fa-google"></i> <span>Google</span></div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p class="footer-highlight">Potencia tu negocio con Inteligencia Artificial</p>
+      <p style="font-size: 0.9em; opacity: 0.7;">© 2025 ConciencIA. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <a href="https://api.whatsapp.com/send/?phone=5491144152278&text&type=phone_number&app_absent=0" class="float-wa" target="_blank">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
   </div>
 
-  <h2>Seguí nuestro Instagram</h2>
-  <div id="widget-instagram">
-    <p class="loading">Cargando publicaciones...</p>
-    <div
-      id="instagramCarousel"
-      class="carousel slide"
-      style="display: none;"
-      data-bs-ride="carousel"
-    >
-      <div class="carousel-inner" id="carousel-inner"></div>
-      <button class="carousel-control-prev" type="button"
-              data-bs-target="#instagramCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      </button>
-      <button class="carousel-control-next" type="button"
-              data-bs-target="#instagramCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      </button>
-    </div>
-  </div>
-
-  <footer>© 2025 ConciencIA. Todos los derechos reservados.</footer>
-
-  <!-- Bootstrap JS bundle -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const loadingEl = document.querySelector('#widget-instagram .loading');
-      const carouselEl = document.getElementById('instagramCarousel');
-      const innerEl = document.getElementById('carousel-inner');
-
-      fetch('/api/instagram')
-        .then(res => {
-          if (!res.ok) throw new Error('HTTP ' + res.status);
-          return res.json();
-        })
-        .then(json => {
-          if (json.error) throw new Error(json.error);
-          const posts = json.data || [];
-          if (posts.length === 0) {
-            loadingEl.textContent = 'No se encontraron publicaciones.';
-            return;
-          }
-
-          loadingEl.style.display = 'none';
-          carouselEl.style.display = 'block';
-
-          posts.forEach((post, idx) => {
-            const imageUrl =
-              post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url;
-            const item = document.createElement('div');
-            item.className = 'carousel-item' + (idx === 0 ? ' active' : '');
-            item.innerHTML = `
-              <a href="${post.permalink}" target="_blank">
-                <img src="${imageUrl}" class="d-block w-100" alt="">
-              </a>
-            `;
-            innerEl.appendChild(item);
-          });
-        })
-        .catch(err => {
-          loadingEl.textContent = 'Error cargando Instagram: ' + err.message;
-          console.error(err);
-        });
-    });
-  </script>
 </body>
 </html>
