@@ -108,7 +108,7 @@
 
     .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
 
-    /* --- ESTILO DE TARJETAS (TIPO IMAGEN) --- */
+    /* --- ESTILO DE TARJETAS --- */
     .custom-card {
       background: #0f1221; 
       border-radius: 16px;
@@ -157,7 +157,7 @@
       text-transform: uppercase; letter-spacing: 0.5px; backdrop-filter: blur(4px);
     }
     
-    .card-badge.secondary { color: #9333EA; border-color: #9333EA; }
+    .card-badge.most-requested { color: #FFD700; border-color: #FFD700; background: rgba(0,0,0,0.8); }
 
     .card-content { padding: 25px; flex: 1; display: flex; flex-direction: column; }
     .card-title { font-size: 1.6em; margin-bottom: 12px; color: #fff; font-weight: 700; }
@@ -171,6 +171,48 @@
       background: rgba(255, 255, 255, 0.05); padding: 6px 12px; border-radius: 20px;
       font-size: 0.8em; border: 1px solid rgba(255, 255, 255, 0.1); color: #ccc;
     }
+
+    /* --- VIDEOS SECTION --- */
+    .video-section {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 20px;
+        padding: 50px 20px;
+        margin: 60px 0;
+        text-align: center;
+        border: 1px solid rgba(64, 224, 208, 0.1);
+    }
+    .video-section h3 { font-size: 2.2em; font-weight: 800; margin-bottom: 10px; color: #fff; }
+    .video-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+    }
+    .video-card {
+        background: #0f1221;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.1);
+        transition: transform 0.3s;
+        position: relative;
+    }
+    .video-card:hover { transform: scale(1.02); border-color: #40E0D0; }
+    .video-thumb { width: 100%; height: 180px; object-fit: cover; opacity: 0.7; transition: opacity 0.3s; }
+    .video-card:hover .video-thumb { opacity: 1; }
+    .play-icon {
+        position: absolute; top: 90px; left: 50%; transform: translate(-50%, -50%);
+        font-size: 3em; color: rgba(255,255,255,0.9); pointer-events: none;
+        text-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .video-title {
+        display: block; padding: 15px; color: #fff; font-weight: 600; text-align: left;
+        background: #1a1f3a;
+    }
+    .cta-youtube {
+        display: inline-block; margin-top: 25px; color: #ff0000; text-decoration: none;
+        font-weight: 700; font-size: 1.1em; transition: 0.3s;
+    }
+    .cta-youtube:hover { color: #fff; text-shadow: 0 0 10px #ff0000; }
 
     /* --- LISTA DE AUTOMATIZACIONES --- */
     .automation-list { list-style: none; padding: 0; }
@@ -348,109 +390,150 @@
 
     <div class="catalog-header">
         <h2>Nuestro catálogo</h2>
-        <p>Soluciones modulares diseñadas para integrarse perfectamente en tu flujo de trabajo actual.</p>
+        <p>Soluciones inteligentes diseñadas para integrarse perfectamente en tu flujo de trabajo actual.</p>
     </div>
 
-    <!-- SECCIÓN 1: ATENCIÓN AL CLIENTE (MOVIDA ARRIBA) -->
+    <!-- PRODUCTO MÁS PEDIDO -->
+    <section class="section-container">
+        <h2 class="catalog-title">⭐ Producto más pedido</h2>
+        <div class="cards-grid">
+          <div class="custom-card">
+            <div class="card-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" alt="Administración Consorcios">
+              <div class="card-img-overlay-gradient"></div>
+              <div class="card-badges">
+                  <span class="card-badge most-requested">Bestseller</span>
+                  <span class="card-badge">EFICIENCIA</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Administración de Consorcio IA</h3>
+              <p class="card-description">
+                La solución definitiva para administradores. Nuestra IA gestiona automáticamente el procesamiento de comprobantes de pago, responde consultas de propietarios 24/7 y activa protocolos de urgencia (gas, agua, seguridad) de forma inmediata. Centraliza toda la operación sin intervención manual.
+              </p>
+              <div class="platforms">
+                <span class="platform-badge"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span>
+                <span class="platform-badge"><i class="fa-solid fa-file-pdf"></i> Procesamiento PDF</span>
+                <span class="platform-badge">🛡️ Urgencias 24/7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- ATENCIÓN AL CLIENTE -->
     <section class="section-container">
       <h2 class="catalog-title">💬 Atención al Cliente</h2>
       <div class="cards-grid">
-        
         <div class="custom-card">
           <div class="card-img-wrapper">
             <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop" alt="Soporte IA">
             <div class="card-img-overlay-gradient"></div>
-            <div class="card-badges">
-              <span class="card-badge">SOPORTE</span>
-              <span class="card-badge secondary">EFICIENCIA</span>
-            </div>
+            <div class="card-badges"><span class="card-badge">SOPORTE</span><span class="card-badge secondary">EFICIENCIA</span></div>
           </div>
-
           <div class="card-content">
             <h3 class="card-title">Soporte & Ticketing IA</h3>
-            <p class="card-description">
-              Brinda una experiencia de usuario impecable. El sistema entiende el lenguaje natural y resuelve el 80% de las dudas frecuentes al instante. Para casos complejos, la IA recopila información, categoriza la incidencia y crea tickets estructurados en tu plataforma, asignando prioridades automáticamente.
-            </p>
+            <p class="card-description">Brinda una experiencia de usuario impecable. El sistema resuelve el 80% de las dudas frecuentes al instante y categoriza incidencias complejas automáticamente en tu plataforma.</p>
             <div class="platforms">
               <span class="platform-badge"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span>
-              <span class="platform-badge"><i class="fa-brands fa-telegram"></i> Telegram</span>
               <span class="platform-badge">📊 Asana</span>
               <span class="platform-badge">📋 Trello</span>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- SECCIÓN 2: AGENTES DE VENTA (MOVIDA ABAJO) -->
+    <!-- AGENTES DE VENTA -->
     <section class="section-container">
       <h2 class="catalog-title">🤖 Agentes de Venta</h2>
       <div class="cards-grid">
-        
         <div class="custom-card">
           <div class="card-img-wrapper">
             <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" alt="Agente Ventas">
             <div class="card-img-overlay-gradient"></div>
-            <div class="card-badges">
-              <span class="card-badge">MULTI-CANAL</span>
-              <span class="card-badge secondary">VENTAS</span>
-            </div>
+            <div class="card-badges"><span class="card-badge">MULTI-CANAL</span><span class="card-badge secondary">VENTAS</span></div>
           </div>
-          
           <div class="card-content">
             <h3 class="card-title">Agente de Ventas</h3>
-            <p class="card-description">
-              Olvídate de perder clientes por demoras. Nuestro agente IA actúa como tu mejor vendedor: atiende consultas en tiempo real 24/7, detecta la intención de compra, maneja objeciones y guía al usuario hasta el cierre o la agenda de una reunión.
-            </p>
+            <p class="card-description">Nuestro agente IA actúa como tu mejor vendedor: atiende consultas en tiempo real 24/7, detecta la intención de compra, maneja objeciones y guía al usuario al cierre.</p>
             <div class="platforms">
               <span class="platform-badge"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span>
-              <span class="platform-badge"><i class="fa-brands fa-telegram"></i> Telegram</span>
               <span class="platform-badge"><i class="fa-brands fa-instagram"></i> Instagram</span>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- SECCIÓN 3: AUTOMATIZACIONES -->
+    <!-- AUTOMATIZACIONES -->
     <section class="section-container">
       <h2 class="catalog-title">⚡ Automatizaciones Empresariales</h2>
       <ul class="automation-list">
         <li>
           <div class="automation-title">📊 Reportes Ejecutivos Automatizados</div>
-          <div class="automation-description">
-            Recibe cada mañana un informe ejecutivo visual con KPIs, ventas y métricas de rendimiento directamente en tu email o canal de Slack, sin abrir una hoja de cálculo.
-          </div>
+          <div class="automation-description">Recibe cada mañana un informe ejecutivo visual con KPIs y ventas directamente en tu email o Slack.</div>
         </li>
-        <!-- ITEM MODIFICADO -->
         <li>
           <div class="automation-title">🎙️ Análisis de Consultas y Grabaciones</div>
-          <div class="automation-description">
-            Ideal para consultorios, clínicas o puntos de venta. Grabamos y transcribimos la interacción con el cliente, generando un análisis detallado y un resumen automático para tu historial o control de calidad.
-          </div>
+          <div class="automation-description">Grabamos y transcribimos la interacción con el cliente, generando un análisis detallado y un resumen automático.</div>
         </li>
         <li>
           <div class="automation-title">📄 Gestión Documental & Facturación</div>
-          <div class="automation-description">
-            La IA extrae datos clave de facturas (PDF o imagen), valida la información fiscal y la carga automáticamente en tu ERP o Google Sheets, organizando los archivos en Drive.
-          </div>
-        </li>
-        <li>
-          <div class="automation-title">✉️ Asistente de Email Corporativo</div>
-          <div class="automation-description">
-            Clasificación automática de la bandeja de entrada, redacción de borradores de respuesta sugeridos y gestión inteligente de archivos adjuntos.
-          </div>
+          <div class="automation-description">La IA extrae datos clave de facturas y los carga automáticamente en tu ERP o Google Sheets.</div>
         </li>
       </ul>
     </section>
 
-    <!-- NUEVA SECCIÓN: MÉTRICAS (LO QUE DICEN LOS NÚMEROS) -->
+    <!-- ASESORÍAS PERSONALIZADAS -->
+    <section class="section-container">
+        <h2 class="catalog-title">🤝 Asesorías Personalizadas</h2>
+        <div class="automation-list">
+            <li style="border-left-color: #9333EA;">
+                <div class="automation-title" style="color: #9333EA;">Consultoría Estratégica 1-a-1</div>
+                <div class="automation-description">
+                    ¿No sabés por dónde empezar? Analizamos tu flujo de trabajo actual, identificamos los cuellos de botella y diseñamos un plan de implementación tecnológica a medida para que tu empresa de el salto hacia la automatización total.
+                </div>
+            </li>
+        </div>
+    </section>
+
+    <!-- 🎥 SECCIÓN DE VIDEOS -->
+    <div class="video-section">
+        <h3>🎥 Casos de Uso Reales</h3>
+        <p style="font-size:10pt; margin-bottom:15px;">Hacé clic en los videos para ver cómo funciona:</p>
+        <div class="video-grid">
+          <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=BqLjSbGHmAI" target="_blank" style="text-decoration:none;">
+              <span class="play-icon">▶</span>
+              <img src="https://img.youtube.com/vi/BqLjSbGHmAI/mqdefault.jpg" alt="Procesar comprobantes" class="video-thumb">
+              <span class="video-title">Automatización de Pagos</span>
+            </a>
+          </div>
+          <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=qOjLG_wVHS8" target="_blank" style="text-decoration:none;">
+              <span class="play-icon">▶</span>
+              <img src="https://img.youtube.com/vi/qOjLG_wVHS8/mqdefault.jpg" alt="Atención de Leads" class="video-thumb">
+              <span class="video-title">Gestión de Ventas (Leads)</span>
+            </a>
+          </div>
+          <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=cBQkBF2ouZ0" target="_blank" style="text-decoration:none;">
+              <span class="play-icon">▶</span>
+              <img src="https://img.youtube.com/vi/cBQkBF2ouZ0/mqdefault.jpg" alt="Urgencias 24/7" class="video-thumb">
+              <span class="video-title">Urgencias y Seguridad 24/7</span>
+            </a>
+          </div>
+        </div>
+        <br>
+        <p style="font-size:10pt; margin-top:15px;">¿Querés ver más ejemplos?</p>
+        <a href="https://www.youtube.com/@Conciencia.IA0" target="_blank" rel="noopener" class="cta-youtube">▶ Visitar Canal de YouTube</a>
+    </div>
+
+    <!-- MÉTRICAS (RESTAURADO ORIGINAL) -->
     <section class="metrics-section">
       <h2 class="metrics-title">Menos tareas repetitivas, más tiempo para lo importante</h2>
       <p class="metrics-subtitle">Automatizar no es solo ahorrar tiempo, es recuperar el foco para escalar tu negocio.</p>
-      
       <div class="metrics-grid">
         <div class="metric-item">
           <span class="metric-number">+5 h/día</span>
@@ -473,38 +556,25 @@
       </div>
     </section>
 
-    <!-- NUEVA SECCIÓN: CÓMO EMPEZAMOS -->
+    <!-- CÓMO EMPEZAMOS (RESTAURADO ORIGINAL) -->
     <section class="steps-section">
       <h2 class="catalog-title" style="border:none; padding:0; text-align:center;">¿Cómo empezamos?</h2>
       <div class="steps-grid">
-        
-        <!-- Paso 1 -->
         <div class="step-card">
           <div class="step-number">1</div>
           <h3 class="step-title">Agenda tu meet</h3>
-          <p class="step-desc">
-            Tenemos una breve reunión para entender los cuellos de botella de tu negocio y definir la mejor estrategia.
-          </p>
+          <p class="step-desc">Tenemos una breve reunión para entender los cuellos de botella de tu negocio y definir la mejor estrategia.</p>
         </div>
-
-        <!-- Paso 2 -->
         <div class="step-card">
           <div class="step-number">2</div>
           <h3 class="step-title">Desarrollo</h3>
-          <p class="step-desc">
-            Configuramos y entrenamos a tus agentes IA con tu información y estilo de marca. Integramos tus canales.
-          </p>
+          <p class="step-desc">Configuramos y entrenamos a tus agentes IA con tu información y estilo de marca. Integramos tus canales.</p>
         </div>
-
-        <!-- Paso 3 -->
         <div class="step-card">
           <div class="step-number">3</div>
           <h3 class="step-title">En 30 días funcionando</h3>
-          <p class="step-desc">
-            Realizamos las pruebas finales y lanzamos tu sistema automatizado. Tu empresa empieza a trabajar sola.
-          </p>
+          <p class="step-desc">Realizamos las pruebas finales y lanzamos tu sistema automatizado. Tu empresa empieza a trabajar sola.</p>
         </div>
-
       </div>
     </section>
 
@@ -513,7 +583,7 @@
         <p>Si tenés otra idea de desarrollo o una necesidad específica, no dudes en consultarnos. Creamos soluciones a medida.</p>
     </div>
 
-    <!-- TECH STACK -->
+    <!-- TECH STACK (RESTAURADO ORIGINAL) -->
     <section class="tech-stack">
         <div class="tech-title">TECNOLOGÍA DE VANGUARDIA</div>
         <div class="logos-container">
@@ -526,7 +596,7 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- FOOTER (RESTAURADO ORIGINAL) -->
     <footer>
       <p class="footer-highlight">Potencia tu negocio con Inteligencia Artificial</p>
       <p style="font-size: 0.9em; opacity: 0.7;">© 2025 ConciencIA. Todos los derechos reservados.</p>
@@ -538,8 +608,5 @@
     </a>
 
   </div>
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
